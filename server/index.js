@@ -26,10 +26,14 @@ app.use(helmet())
 app.use(hpp())
 app.use(mongoSanitize())
 
+
+
 //logging middelware
 if(process.env.NODE_ENV === "devlopment"){
     app.use(morgan('dev'))
 }
+
+
 
 //Body parse middleware
 app.use(express.json({limit: '10kb'}))
@@ -49,6 +53,8 @@ app.use((err, req, res, next)=>{
     )
 })
 
+
+
 //CORS Configuration
 app.use(cors({
     origin: process.env.CLIENT_URL || "http://localhost:5173",
@@ -65,6 +71,9 @@ app.use(cors({
     ]
 }))
 
+
+
+//404 Route Handler
 app.use((req, res)=>{
     res.status(404).json(
         {
